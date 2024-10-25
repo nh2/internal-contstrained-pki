@@ -48,7 +48,7 @@ else
 
   set -x
   openssl genrsa -out "ca-${BASE_DOMAIN}.key.pem" 4096
-  openssl req -new -key "ca-${BASE_DOMAIN}.key.pem" -extensions v3_ca -batch -out "ca-${BASE_DOMAIN}.csr" -utf8 -subj '/O=Internal'
+  openssl req -new -key "ca-${BASE_DOMAIN}.key.pem" -batch -out "ca-${BASE_DOMAIN}.csr" -utf8 -subj '/O=Internal'
   { set +x; } 2> /dev/null
 
 
@@ -78,7 +78,7 @@ if [ -f wildcard.${BASE_DOMAIN}.key.pem ]; then
 else
   set -x
   openssl genrsa -out wildcard.${BASE_DOMAIN}.key.pem 2048
-  openssl req -new -key wildcard.${BASE_DOMAIN}.key.pem -extensions v3_ca -batch -out "wildcard.${BASE_DOMAIN}.csr" -utf8 -subj "/CN=*.${BASE_DOMAIN}"
+  openssl req -new -key wildcard.${BASE_DOMAIN}.key.pem -batch -out "wildcard.${BASE_DOMAIN}.csr" -utf8 -subj "/CN=*.${BASE_DOMAIN}"
   { set +x; } 2> /dev/null
 
   cat <<'EOF' >"certext-wildcard.${BASE_DOMAIN}.ini"
